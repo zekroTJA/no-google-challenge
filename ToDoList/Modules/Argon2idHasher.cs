@@ -4,17 +4,14 @@ using System.Buffers.Text;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using ToDoList.Util;
 
 namespace ToDoList.Modules
 {
     public class Argon2idHasher : IPasswordHasher
     {
-        private readonly RNGCryptoServiceProvider rng;
-
         public Argon2idHasher()
-        {
-            rng = new RNGCryptoServiceProvider();
-        }
+        { }
 
         public bool CompareHashAndPassword(string hashString, string password)
         {
@@ -42,18 +39,11 @@ namespace ToDoList.Modules
             hasher.DegreeOfParallelism = Environment.ProcessorCount;
             hasher.Iterations = 5;
             hasher.MemorySize = 131_072; // 128MiB
-            hasher.Salt = GetRandomSalt(32);
+            hasher.Salt = CryptoRandom.GetBytes(32);
         }
 
         private Argon2id GetHasher(string password) =>
             new Argon2id(StringToBytes(password));
-
-        private byte[] GetRandomSalt(uint size)
-        {
-            var bytes = new byte[size];
-            rng.GetBytes(bytes);
-            return bytes;
-        }
 
         private string BytesToString(byte[] bytes) =>
             Convert.ToBase64String(bytes);
