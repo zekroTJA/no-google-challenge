@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ToDoList.Database;
+using ToDoList.Modules;
 
 namespace ToDoList
 {
@@ -25,6 +26,9 @@ namespace ToDoList
             {
                 ctx.UseNpgsql(Configuration.GetConnectionString("postgres"));
             });
+
+            services
+                .AddSingleton<IPasswordHasher, Argon2idHasher>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
