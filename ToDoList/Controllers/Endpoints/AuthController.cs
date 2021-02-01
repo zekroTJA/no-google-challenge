@@ -9,7 +9,7 @@ using ToDoList.Models.Requests;
 using ToDoList.Models.Responses;
 using ToDoList.Modules;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Endpoints
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,7 +27,7 @@ namespace ToDoList.Controllers
         }
 
         // -------------------------------------------------------------------------------
-        // --- POST /auth/register
+        // --- POST /api/auth/register
 
         [HttpPost("[action]")]
         public async Task<ActionResult<UserView>> Register(AuthCredentials creds)
@@ -48,7 +48,7 @@ namespace ToDoList.Controllers
         }
 
         // -------------------------------------------------------------------------------
-        // --- POST /auth/login
+        // --- POST /api/auth/login
 
         [HttpPost("[action]")]
         public async Task<ActionResult<UserView>> Login(AuthCredentials creds)
