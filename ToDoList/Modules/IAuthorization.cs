@@ -1,6 +1,6 @@
 ﻿namespace ToDoList.Modules
 {
-    interface IAuthorization
+    public interface IAuthorization
     {
         string GetAuthToken(AuthClaims claims);
         AuthClaims ValidateAuth(string token);

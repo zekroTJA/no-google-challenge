@@ -43,13 +43,7 @@ namespace ToDoList.Modules
         }
 
         private Argon2id GetHasher(string password) =>
-            new Argon2id(StringToBytes(password));
-
-        private string BytesToString(byte[] bytes) =>
-            Convert.ToBase64String(bytes);
-
-        private byte[] StringToBytes(string str) =>
-            Convert.FromBase64String(str);
+            new Argon2id(Encoding.UTF8.GetBytes(password));
 
         // This is not the standardized way to store hashes!
         // I just dont remember how this string has to be assembled, so
@@ -57,18 +51,18 @@ namespace ToDoList.Modules
         private string EncodeHash(
             int degreeOfParallelism, int iterations,
             int memorySize, byte[] salt, byte[] hash) =>
-            $"$argon2id$dop={degreeOfParallelism}$itr={iterations}$mem={memorySize}$slt={BytesToString(salt)}$hsh={BytesToString(hash)}";
+            $"$argon2id$dop={degreeOfParallelism}$itr={iterations}$mem={memorySize}$slt={Convert.ToBase64String(salt)}$hsh={Convert.ToBase64String(hash)}";
 
         private (int DegreeOfParallelism, int Iterations, int MemorySize, byte[] salt, byte[] hash) DecodeHash(string hash)
         {
-            if (hash.StartsWith("$argon2id"))
+            if (!hash.StartsWith("$argon2id"))
                 throw new ArgumentException("not an argon2id hash");
 
             var dop = int.Parse(GetKVValue(hash, "dop"));
             var itr = int.Parse(GetKVValue(hash, "itr"));
             var mem = int.Parse(GetKVValue(hash, "mem"));
-            var slt = StringToBytes(GetKVValue(hash, "slt"));
-            var hsh = StringToBytes(GetKVValue(hash, "hsh"));
+            var slt = Convert.FromBase64String(GetKVValue(hash, "slt"));
+            var hsh = Convert.FromBase64String(GetKVValue(hash, "hsh"));
 
             return (dop, itr, mem, slt, hsh);
         }

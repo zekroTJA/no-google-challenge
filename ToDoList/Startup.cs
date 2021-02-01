@@ -28,7 +28,8 @@ namespace ToDoList
             });
 
             services
-                .AddSingleton<IPasswordHasher, Argon2idHasher>();
+                .AddSingleton<IPasswordHasher, Argon2idHasher>()
+                .AddSingleton<IAuthorization, JWTAuthorization>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

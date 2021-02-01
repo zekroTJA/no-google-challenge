@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,32 +17,61 @@ namespace ToDoList.Controllers
     {
         private readonly Context db;
         private readonly IPasswordHasher hasher;
+        private readonly IAuthorization auth;
 
-        public AuthController(Context _db, IPasswordHasher _hasher)
+        public AuthController(Context _db, IPasswordHasher _hasher, IAuthorization _auth)
         {
             db = _db;
             hasher = _hasher;
+            auth = _auth;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(AuthRegister register)
-        {
-            // all login names are lowercase
-            register.LoginName = register.LoginName.ToLower();
+        // -------------------------------------------------------------------------------
+        // --- POST /auth/register
 
-            if (await db.Users.AnyAsync(u => u.LoginName == register.LoginName))
+        [HttpPost("[action]")]
+        public async Task<ActionResult<UserView>> Register(AuthCredentials creds)
+        {
+            if (await db.Users.AnyAsync(u => u.LoginName == creds.LoginName))
                 return BadRequest("login name already exists");
 
             var user = new User()
             {
-                LoginName = register.LoginName,
-                PasswordHash = hasher.HashFromPassword(register.Password),
+                LoginName = creds.LoginName,
+                PasswordHash = hasher.HashFromPassword(creds.Password),
             };
 
             db.Add(user);
             await db.SaveChangesAsync();
 
             return Created($"/users/{user.Id}", new UserView(user));
+        }
+
+        // -------------------------------------------------------------------------------
+        // --- POST /auth/login
+
+        [HttpPost("[action]")]
+        public async Task<ActionResult<UserView>> Login(AuthCredentials creds)
+        {
+            var user = await db.Users.Where(u => u.LoginName == creds.LoginName).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            if (!hasher.CompareHashAndPassword(user.PasswordHash, creds.Password))
+                return Unauthorized();
+
+            var sessionJwt = auth.GetAuthToken(new AuthClaims(user.Id));
+            var cookieOptions = new CookieOptions()
+            {
+                HttpOnly = true,
+                MaxAge = Constants.SESSION_EXPIRATION,
+#if RELEASE
+                Secure = true,
+#endif
+            };
+            Response.Cookies.Append(Constants.SESSION_COOKIE_NAME, sessionJwt, cookieOptions);
+
+            return Ok(new UserView(user));
         }
     }
 }
