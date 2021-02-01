@@ -30,6 +30,22 @@ It is allowed to use online documentation. Also, you are allowed to use simple s
 - Using Continuous Deployment Pipelines.
 - Make the web app actually look nice.
 
+## My Approach
+
+I have chosen to go with ASP.NET *(.NET 5)* as REST API framework in combination with the Entity Framework to bind to the database. ASP.NET + EF is a nice out-of-the-box solution and Microsoft provides great documentation for the .NET platform.
+
+As database service, I've chosen to use PostgreSQL. It's free, fast, solid, easy to set up using Docker, well documented and the provided extension package for the Entity Framework works great.
+
+For the web app, I am using Angular. It's a bit overkill, but it contains all important tools *(Ajax, Router, ...)*, it is well documented as well and I it's the framework I am using at my company and so I'm most confident with.
+
+For user authentication, I'm using JWT to create session tokens and Argon2ID to hash passwords. These are *currently* the most state of the art techniques for user authentication and secure secrets storage.
+
+To create a CD pipeline, I will use GitHub Actions. It's well integrated into GitHub, well documented, very fast and powerful and easy to set up.
+
+To deploy the application and the database to my Linux VPS, I will use Docker and docker compose, because all used services are well integrated with Docker and the deployment is verry easy, especially because I have a lot of experiences working with these tools.
+
+![](.github/assets/structure.jpg)
+
 ## My Results and Findings
 
 > *soon*
