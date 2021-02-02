@@ -30,7 +30,7 @@ namespace ToDoList.Controllers.Endpoints
         // --- POST /api/auth/register
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<UserView>> Register(AuthCredentials creds)
+        public async Task<ActionResult<UserView>> Register([FromBody] AuthCredentials creds)
         {
             if (await db.Users.AnyAsync(u => u.LoginName == creds.LoginName))
                 return BadRequest("login name already exists");
@@ -44,14 +44,14 @@ namespace ToDoList.Controllers.Endpoints
             db.Add(user);
             await db.SaveChangesAsync();
 
-            return Created($"/users/{user.Id}", new UserView(user));
+            return Created($"/api/users/{user.Id}", new UserView(user));
         }
 
         // -------------------------------------------------------------------------------
         // --- POST /api/auth/login
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<UserView>> Login(AuthCredentials creds)
+        public async Task<ActionResult<UserView>> Login([FromBody] AuthCredentials creds)
         {
             var user = await db.Users.Where(u => u.LoginName == creds.LoginName).FirstOrDefaultAsync();
             if (user == null)
