@@ -2,6 +2,9 @@
 
 namespace ToDoList.Models.Responses
 {
+    /// <summary>
+    /// Response view model of a todo list entry.
+    /// </summary>
     public class TodoEntryView : Entity
     {
         [JsonPropertyName("contained_in")]

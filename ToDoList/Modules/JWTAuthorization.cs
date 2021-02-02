@@ -8,6 +8,9 @@ using ToDoList.Util;
 
 namespace ToDoList.Modules
 {
+    /// <summary>
+    /// JSON web token implementation of <see cref="IAuthorization"/>.
+    /// </summary>
     public class JWTAuthorization : IAuthorization
     {
         private readonly ILogger<JWTAuthorization> logger;

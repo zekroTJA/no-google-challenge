@@ -2,6 +2,9 @@
 
 namespace ToDoList.Models.Responses
 {
+    /// <summary>
+    /// Response view model for a user.
+    /// </summary>
     public class UserView : Entity
     {
         [JsonPropertyName("login_name")]

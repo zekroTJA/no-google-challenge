@@ -4,6 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace ToDoList.Models
 {
+    /// <summary>
+    /// Database model for a generic entity which 
+    /// has a uniqie Id, which also acts as the primary
+    /// database key, and a creation timestamp.
+    /// </summary>
     public class Entity
     {
         [Key]

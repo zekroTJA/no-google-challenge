@@ -4,6 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace ToDoList.Modules
 {
+    /// <summary>
+    /// Properties used to authenticate a user 
+    /// and used to initialize a authentication
+    /// (/session) token.
+    /// </summary>
     public class AuthClaims
     {
         [JsonPropertyName("sub")]

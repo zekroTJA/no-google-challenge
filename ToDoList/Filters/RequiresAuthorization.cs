@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ToDoList.Controllers;
 using ToDoList.Database;
@@ -9,6 +7,15 @@ using ToDoList.Modules;
 
 namespace ToDoList.Filters
 {
+    /// <summary>
+    /// Action filter attribute used to get the authorization token from the
+    /// requests cookies header and tries to validate this header and sets the
+    /// values for AuthClaims and AuthorizedUser for the <see cref="AuthorizedControllerBase"/>
+    /// instance. <br />
+    /// The request is canceled and an 401 Unauthorized response is returned when
+    /// either the token is not present in the cookie or if the token validation
+    /// failed.
+    /// </summary>
     public class RequiresAuthorization : ActionFilterAttribute
     {
         private readonly Context db;
@@ -22,7 +29,7 @@ namespace ToDoList.Filters
 
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var controller = context.Controller as AuthorizedController;
+            var controller = context.Controller as AuthorizedControllerBase;
             if (controller == null)
                 throw new Exception("the controller is not an AuthorizedController");
 

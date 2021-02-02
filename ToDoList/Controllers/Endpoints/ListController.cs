@@ -12,10 +12,14 @@ using ToDoList.Models.Responses;
 
 namespace ToDoList.Controllers.Endpoints
 {
+    /// <summary>
+    /// Endpoint controller to create, modify and remove lists
+    /// as well as list entries.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(RequiresAuthorization))]
-    public class ListController : AuthorizedController
+    public class ListController : AuthorizedControllerBase
     {
         private readonly Context db;
 

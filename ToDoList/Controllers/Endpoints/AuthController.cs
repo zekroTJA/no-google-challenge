@@ -11,6 +11,9 @@ using ToDoList.Modules;
 
 namespace ToDoList.Controllers.Endpoints
 {
+    /// <summary>
+    /// Endpoint controller for user registration and login.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase

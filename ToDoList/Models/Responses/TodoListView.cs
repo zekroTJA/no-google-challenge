@@ -2,6 +2,9 @@
 
 namespace ToDoList.Models.Responses
 {
+    /// <summary>
+    /// Response view model for a todo list.
+    /// </summary>
     public class TodoListView : Entity
     {
         [JsonPropertyName("owner")]
