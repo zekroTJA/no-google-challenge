@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using ToDoList.Database;
@@ -75,6 +76,25 @@ namespace ToDoList.Controllers.Endpoints
             Response.Cookies.Append(Constants.SESSION_COOKIE_NAME, sessionJwt, cookieOptions);
 
             return Ok(new UserView(user));
+        }
+
+        // -------------------------------------------------------------------------------
+        // --- POST /api/auth/logout
+
+        [HttpPost("[action]")]
+        public IActionResult Logout()
+        {
+            var cookieOptions = new CookieOptions()
+            {
+                HttpOnly = true,
+                MaxAge = TimeSpan.Zero,
+#if RELEASE
+                Secure = true,
+#endif
+            };
+            Response.Cookies.Append(Constants.SESSION_COOKIE_NAME, "", cookieOptions);
+
+            return NoContent();
         }
     }
 }
