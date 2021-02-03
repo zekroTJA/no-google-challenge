@@ -19,11 +19,11 @@ namespace ToDoList.Controllers.Endpoints
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(RequiresAuthorization))]
-    public class ListController : AuthorizedControllerBase
+    public class ListsController : AuthorizedControllerBase
     {
         private readonly Context db;
 
-        public ListController(Context _db)
+        public ListsController(Context _db)
         {
             db = _db;
         }
