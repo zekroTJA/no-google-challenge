@@ -46,6 +46,14 @@ To deploy the application and the database to my Linux VPS, I will use Docker an
 
 ![](.github/assets/structure.jpg)
 
+## Process Documentation
+
+I'm recording my progress creating the web application as videos on my *(german)* YouTube channel. If you are interested *(and if you understand german)*, take a look. ;)
+
+- [**Episode 1**](https://youtu.be/aw4YWKslhUs): Intro & Database Bindings
+- [**Episode 2**](https://youtu.be/tlqYuGF6fZ0): User Authorization
+- [**Episode 3**](https://youtu.be/ZpFVGeIgHCc): List/Entry Endpoints
+
 ## My Results and Findings
 
 > *soon*
