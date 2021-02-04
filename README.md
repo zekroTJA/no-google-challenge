@@ -29,6 +29,7 @@ It is allowed to use online documentation. Also, you are allowed to use simple s
 - Deployment using Docker and docker-compose (or kubernetes or something like that if you want).
 - Using Continuous Deployment Pipelines.
 - Make the web app actually look nice.
+- Add some Unit Tests.
 
 ## My Approach
 
