@@ -1,4 +1,7 @@
-﻿using JWT.Exceptions;
+﻿using Castle.Core.Logging;
+using JWT.Exceptions;
+using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Threading;
@@ -9,11 +12,18 @@ namespace ToDoList.Test.Modules
     [TestFixture]
     class JWTAuthorizationTest
     {
+        private readonly Mock<ILogger<JWTAuthorization>> loggerMock;
+
+        public JWTAuthorizationTest()
+        {
+            loggerMock = new Mock<ILogger<JWTAuthorization>>(MockBehavior.Loose);
+        }
+
         [Test]
         public void GetAuthTokenTest()
         {
             var key = new byte[] { 01, 02, 03, 04 };
-            var jwt = new JWTAuthorization(key, TimeSpan.FromMinutes(1));
+            var jwt = new JWTAuthorization(loggerMock.Object, key, TimeSpan.FromMinutes(1));
             var claims = new AuthClaims()
             {
                 UserId = Guid.Parse("D9C18D24-9D4F-4BE3-BF3F-1D1A438B8EFB"),
@@ -27,7 +37,7 @@ namespace ToDoList.Test.Modules
         public void ValidateAuthTest()
         {
             var key = new byte[] { 01, 02, 03, 04 };
-            var jwt = new JWTAuthorization(key, TimeSpan.FromSeconds(1));
+            var jwt = new JWTAuthorization(loggerMock.Object, key, TimeSpan.FromSeconds(1));
             var claims = new AuthClaims()
             {
                 UserId = Guid.Parse("D9C18D24-9D4F-4BE3-BF3F-1D1A438B8EFB"),

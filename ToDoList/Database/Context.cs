@@ -7,7 +7,7 @@ namespace ToDoList.Database
     /// Database context used to access the database
     /// sets via the entity framework bindings.
     /// </summary>
-    public class Context : DbContext
+    public class Context : DbContext, IContext
     {
         /// <summary>
         /// Users database collection/table.

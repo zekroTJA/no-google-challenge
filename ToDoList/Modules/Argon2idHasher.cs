@@ -17,6 +17,9 @@ namespace ToDoList.Modules
         /// <inheritdoc />
         public bool CompareHashAndPassword(string hashString, string password)
         {
+            if (hashString == null) throw new ArgumentNullException(nameof(hashString));
+            if (hashString.Length < 1) throw new ArgumentException(nameof(hashString));
+
             var (degreeOfParallelism, iterations, memorySize, salt, hash) = DecodeHash(hashString);
             var hasher = GetHasher(password);
             hasher.DegreeOfParallelism = degreeOfParallelism;

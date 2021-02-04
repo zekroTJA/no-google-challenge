@@ -21,9 +21,9 @@ namespace ToDoList.Controllers.Endpoints
     [TypeFilter(typeof(RequiresAuthorization))]
     public class ListsController : AuthorizedControllerBase
     {
-        private readonly Context db;
+        private readonly IContext db;
 
-        public ListsController(Context _db)
+        public ListsController(IContext _db)
         {
             db = _db;
         }

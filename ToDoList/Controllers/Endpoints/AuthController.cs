@@ -19,11 +19,11 @@ namespace ToDoList.Controllers.Endpoints
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly Context db;
+        private readonly IContext db;
         private readonly IPasswordHasher hasher;
         private readonly IAuthorization auth;
 
-        public AuthController(Context _db, IPasswordHasher _hasher, IAuthorization _auth)
+        public AuthController(IContext _db, IPasswordHasher _hasher, IAuthorization _auth)
         {
             db = _db;
             hasher = _hasher;

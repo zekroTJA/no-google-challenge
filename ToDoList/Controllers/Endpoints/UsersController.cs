@@ -17,10 +17,10 @@ namespace ToDoList.Controllers.Endpoints
     [TypeFilter(typeof(RequiresAuthorization))]
     public class UsersController : AuthorizedControllerBase
     {
-        private readonly Context db;
+        private readonly IContext db;
         private readonly IPasswordHasher hasher;
 
-        public UsersController(Context _db, IPasswordHasher _hasher)
+        public UsersController(IContext _db, IPasswordHasher _hasher)
         {
             db = _db;
             hasher = _hasher;

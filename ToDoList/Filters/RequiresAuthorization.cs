@@ -18,10 +18,10 @@ namespace ToDoList.Filters
     /// </summary>
     public class RequiresAuthorization : ActionFilterAttribute
     {
-        private readonly Context db;
+        private readonly IContext db;
         private readonly IAuthorization auth;
 
-        public RequiresAuthorization(Context _db, IAuthorization _auth)
+        public RequiresAuthorization(IContext _db, IAuthorization _auth)
         {
             db = _db;
             auth = _auth;
@@ -50,7 +50,6 @@ namespace ToDoList.Filters
                 context.Result = controller.Unauthorized();
                 return;
             }
-                
 
             await next();
         }

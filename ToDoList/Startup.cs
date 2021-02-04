@@ -26,7 +26,7 @@ namespace ToDoList
             var jwtSigningKey = Configuration.GetValue<string>("Authorization:JWTSigningKey");
 
             services
-                .AddDbContext<Context>(ctx =>
+                .AddDbContext<IContext, Context>(ctx =>
                     ctx.UseNpgsql(Configuration.GetConnectionString("postgres")))
                 .AddSingleton<IPasswordHasher, Argon2idHasher>()
                 .AddSingleton<IAuthorization>((services) => jwtSigningKey == null
@@ -61,7 +61,7 @@ namespace ToDoList
             });
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var db = scope.ServiceProvider.GetService<Context>())
+            using (var db = scope.ServiceProvider.GetService<IContext>()!)
             {
                 db.Database.Migrate();
             }
