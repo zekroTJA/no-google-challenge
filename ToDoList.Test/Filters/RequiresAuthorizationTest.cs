@@ -80,9 +80,13 @@ namespace ToDoList.Test.Filters
             await GetFilter().OnActionExecutionAsync(actionContextMock.Object, () => null);
             actionContextMock.VerifySet(c => c.Result = It.IsAny<UnauthorizedResult>());
 
+            var controller = new AuthorizedControllerBase();
+            actionContextMock.Setup(c => c.Controller).Returns(controller);
             httpContextMock.Setup(c => c.Request.Cookies.TryGetValue(Constants.SESSION_COOKIE_NAME, out authToken)).Returns(true);
             await GetFilter().OnActionExecutionAsync(actionContextMock.Object, nextMock.Object);
             nextMock.Verify(m => m.Invoke(), Times.AtLeastOnce());
+            Assert.AreSame(claims, controller.AuthClaims);
+            Assert.AreSame(user, controller.AuthorizedUser);
         }
     }
 }
