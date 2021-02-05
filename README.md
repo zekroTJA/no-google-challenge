@@ -1,5 +1,7 @@
 # No "Google" Challenge
 
+[![CI](https://github.com/zekroTJA/no-google-challenge/workflows/CI/badge.svg)](https://github.com/zekroTJA/no-google-challenge/runs/1838871697)
+
 ## Inspiration
 
 Recently, I read [this](https://web.eecs.utk.edu/~azh/blog/webappwithoutgoogling.html?s=09) article by Austin Z. Henley with the name "Can you make a basic web app without googling?". I mean, we all know as developers, the meme about this is kinda true. Everyone of us is familiar with google queries like "Get datetime in {language}".
