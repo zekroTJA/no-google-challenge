@@ -47,6 +47,11 @@ namespace ToDoList
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDoList v1"));
+                app.UseCors(cors => cors
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
             }
 
             app.UseHttpsRedirection();
