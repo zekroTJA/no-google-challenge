@@ -1,0 +1,19 @@
+<div class="center-inner">
+  <div>
+    <div class="header-selector">
+      <a class="header-slice" [class.active]="active === 0" (click)="active = 0">LOGIN</a>
+      <a class="header-slice" [class.active]="active === 1" (click)="active = 1">REGISTER</a>
+    </div>
+    <div>
+      <input #iLoginname
+        placeholder="username"
+        (keypress)="onKeyPress($event, iLoginname.value, iPassword.value)"
+      />
+      <input #iPassword
+        placeholder="password"
+        type="password"
+        (keypress)="onKeyPress($event, iLoginname.value, iPassword.value)"
+      />
+    </div>
+  </div>
+</div>

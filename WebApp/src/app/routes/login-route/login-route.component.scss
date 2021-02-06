@@ -1,0 +1,40 @@
+@import '../../scss/colors.scss';
+
+input {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+
+  &:first-child {
+    margin-top: 60px;
+  }
+
+  &:last-child {
+    margin-top: 40px;
+  }
+}
+
+.header-selector {
+  display: flex;
+  width: 90vw;
+  max-width: 400px;
+
+
+  .header-slice {
+    color: $c-whitish-1;
+    border: solid 1px $c-whitish-1;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: all .25s ease;
+
+    &.active {
+      background-color: $c-whitish-1;
+      color: $c-background;
+    }
+  }
+}
+

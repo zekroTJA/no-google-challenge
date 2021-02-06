@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@import './app/scss/colors.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap');
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px $c-whitish-1;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.center-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  > * {
+    margin: auto;
+  }
+}

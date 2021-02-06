@@ -1,0 +1,39 @@
+@import '../../scss/colors.scss';
+
+.container {
+  position: fixed;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  transition: all .35s ease;
+
+  bottom: -45px;
+  opacity: 0;
+
+  > div {
+    width: fit-content;
+    margin: auto;
+    padding: 10px 20px;
+    color: $c-whitish-1;
+    border-radius: 5px;
+    box-shadow: rgba(black, 0.25) 0px 5px 20px 0px;
+    max-width: 80vw;
+  }
+
+  &.active {
+    bottom: 20px;
+    opacity: 1;
+  }
+
+  &.info {
+    > div { background-color: #1693ce; }
+  }
+
+  &.error {
+    > div { background-color: #ce1616; }
+  }
+
+  &.success {
+    > div { background-color: #41ce16; }
+  }
+}

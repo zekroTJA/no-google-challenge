@@ -1,0 +1,13 @@
+@import './scss/colors.scss';
+
+
+
+.router-outlet {
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  background-color: $c-background;
+  color: white;
+}

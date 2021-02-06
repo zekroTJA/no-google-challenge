@@ -33,10 +33,15 @@ export default class RestAPIService implements IAPIService {
   }
 
   login(login_name: string, password: string): Observable<UserModel> {
-    return this.post<UserModel>('/auth/login', {
-      login_name,
-      password,
-    });
+    return this.post<UserModel>(
+      '/auth/login',
+      {
+        login_name,
+        password,
+      },
+      undefined,
+      false
+    );
   }
 
   logout(): Observable<any> {
@@ -124,14 +129,15 @@ export default class RestAPIService implements IAPIService {
   private post<T>(
     path: string,
     body?: any,
-    params?: HttpParams
+    params?: HttpParams,
+    catchAuthErr = true
   ): Observable<T> {
     return this.client
       .post<T>(`${API_BASE}${path}`, body, {
         withCredentials: true,
         params,
       })
-      .pipe(catchError(this.errorHandler.bind(this)));
+      .pipe(catchError((e, c) => this.errorHandler(e, c, catchAuthErr)));
   }
 
   private delete<T>(
@@ -149,11 +155,15 @@ export default class RestAPIService implements IAPIService {
 
   private errorHandler<T>(
     err: HttpErrorResponse,
-    caught: Observable<T>
+    caught: Observable<T>,
+    catchAuthErr = true
   ): Observable<any> {
     if (err.status === 401) {
       this.authError.emit(err);
-      return of({});
+      if (catchAuthErr) {
+        return of({});
+      }
+      throw err;
     }
 
     this.error?.emit(err);
