@@ -103,6 +103,9 @@ namespace ToDoList.Controllers.Endpoints
             if (list == null || list.Owner.Id != AuthorizedUser.Id)
                 return NotFound();
 
+            var entries = await db.Entries.Where(e => e.ContainedIn.Id == list.Id).ToArrayAsync();
+
+            db.RemoveRange(entries);
             db.Remove(list);
             await db.SaveChangesAsync();
 
