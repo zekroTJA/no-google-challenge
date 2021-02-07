@@ -98,7 +98,7 @@ export default class RestAPIService implements IAPIService {
   }
 
   deleteListEntry(id: string, entry_id: string): Observable<any> {
-    return this.delete<any>(`/lists/${id}/entries/${id}`);
+    return this.delete<any>(`/lists/${id}/entries/${entry_id}`);
   }
 
   getMe(): Observable<UserModel> {

@@ -4,14 +4,13 @@ import {
   SnackBarService,
   SnackBarType,
 } from 'src/app/components/snack-bar/snack-bar.service';
+import { IsNew } from 'src/app/models/isnew.model';
 import { TodoListModel } from 'src/app/models/todolist.model';
 import { IAPIService } from 'src/app/services/api.interface';
 import { ErrorService } from 'src/app/services/error.service';
 import ListUtil from 'src/app/util/lists';
 
-interface TodoListModelExt extends TodoListModel {
-  isNew: boolean;
-}
+interface TodoListModelExt extends TodoListModel, IsNew {}
 
 @Component({
   selector: 'app-lists-route',
@@ -89,7 +88,6 @@ export class ListsRouteComponent implements OnInit {
   }
 
   onListClick(list: TodoListModelExt) {
-    console.log('NAV', list.id);
-    // this.router.navigate(['lists', list.id]);
+    this.router.navigate(['lists', list.id]);
   }
 }

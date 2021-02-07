@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { ListsRouteComponent } from './routes/lists-route/lists-route.component';
 import { EditTileComponent } from './components/edit-tile/edit-tile.component';
+import { ListRouteComponent } from './routes/list-route/list-route.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EditTileComponent } from './components/edit-tile/edit-tile.component';
     SnackBarComponent,
     ListsRouteComponent,
     EditTileComponent,
+    ListRouteComponent,
   ],
   imports: [
     BrowserModule,

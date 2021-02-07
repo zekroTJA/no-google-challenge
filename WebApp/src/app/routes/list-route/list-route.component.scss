@@ -1,0 +1,41 @@
+@import '../../scss/colors.scss';
+
+.title-bar {
+  width: 90vw;
+  max-width: 600px;
+}
+
+.entries-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: $c-whitish-3;
+    }
+
+  }
+
+  .strike {
+    position: absolute;
+    top: 23px;
+    width: 100%;
+    height: 4px;
+    background-color: $c-whitish-1;
+  }
+
+  .add-entry-tile {
+    font-size: 24px;
+    padding: 5px 10px;
+    opacity: 0.5;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+}
