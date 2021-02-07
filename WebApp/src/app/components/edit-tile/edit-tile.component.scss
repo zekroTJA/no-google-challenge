@@ -1,0 +1,41 @@
+@import '../../scss/colors.scss';
+
+.container {
+  position: relative;
+  text-align: center;
+  border: solid 1px $c-whitish-1;
+
+  &:hover > .controls {
+    opacity: 1;
+  }
+
+  > .controls {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 100%;
+    display: flex;
+    opacity: 0;
+    transition: all 0.15s ease;
+
+    > * {
+      margin: auto 0;
+      padding: 5px;
+      display: flex;
+      cursor: pointer;
+
+      > img {
+        margin: auto;
+      }
+    }
+  }
+
+  input {
+    padding: 0;
+    width: 100%;
+    border: none;
+    font-size: inherit;
+    text-align: inherit;
+    cursor: inherit;
+  }
+}

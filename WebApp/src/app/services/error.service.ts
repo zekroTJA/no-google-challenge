@@ -31,7 +31,7 @@ export class ErrorService {
     return this.wrapAsync(() => req(), onError);
   }
 
-  private defaultRequestErrorHandler(err: HttpErrorResponse) {
+  defaultRequestErrorHandler(err: HttpErrorResponse) {
     let content = 'An unknown error occured.';
     if (err.error) content = `${err.error} (${err.status})`;
     this.snackBar.show(content, SnackBarType.ERROR, 3500);

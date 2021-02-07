@@ -1,0 +1,31 @@
+<div
+  class="container"
+  [style.font-size]="fontSize"
+  [style.padding]="padding"
+  [style.text-align]="textAlign"
+  [style.border-style]="border ? 'solid' : 'none'"
+  [style.cursor]="isEditing ? 'text' : 'default'"
+  (click)="onClick($event)"
+  (dblclick)="onEdit($event)"
+>
+  <input #iContent
+    [readonly]="!isEditing"
+    [(ngModel)]="content"
+    (keypress)="onInputKeyPress($event)"
+  />
+  <div *ngIf="!readonly" class="controls">
+    <a *ngIf="!isEditing" (click)="onEdit($event)">
+      <img height="20" width="20" src="/assets/pencil.svg"/>
+    </a>
+    <a *ngIf="isEditing" (click)="onEditStop($event)">
+      <img height="20" width="20" src="/assets/check.svg"/>
+    </a>
+    <a *ngIf="!isEditing"
+      (click)="onRemove($event)"
+      [title]="confirmRemoval ? 'Click to confirm delete' : ''"
+    >
+      <img *ngIf="!confirmRemoval" height="20" width="20" src="/assets/trash.svg"/>
+      <img *ngIf="confirmRemoval" height="20" width="20" src="/assets/attention.svg"/>
+    </a>
+  </div>
+</div>

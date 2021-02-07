@@ -1,0 +1,31 @@
+@import '../../scss/colors.scss';
+
+.title-bar {
+  width: 90vw;
+  max-width: 600px;
+}
+
+.lists-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: $c-whitish-3;
+    }
+  }
+
+  .add-list-tile {
+    font-size: 24px;
+    padding: 5px 10px;
+    opacity: 0.5;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+}
