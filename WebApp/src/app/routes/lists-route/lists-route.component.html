@@ -14,7 +14,7 @@
           <app-skeleton-tile [delay]="i * 0.1 + 's'" height="45px"></app-skeleton-tile>
         </div>
       </ng-template>
-      <div *ngFor="let l of lists">
+      <div *ngFor="let l of lists" class="hover-background">
         <app-edit-tile
           [(content)]="l.name"
           [isEditing]="l.isNew"
@@ -27,7 +27,7 @@
           (remove)="onDelete(l)"
         ></app-edit-tile>
       </div>
-      <div class="add-list-tile" (click)="onNew()">
+      <div class="add-list-tile hover-background" (click)="onNew()">
         <span>+ ADD LIST</span>
       </div>
     </div>

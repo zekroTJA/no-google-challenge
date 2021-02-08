@@ -7,6 +7,9 @@ import {
 } from './components/snack-bar/snack-bar.service';
 import { IAPIService } from './services/api.interface';
 import { ErrorService } from './services/error.service';
+import LocalStorageUtil from './util/localstorage';
+
+const LIGHT_THEME_KEY = 'i-want-to-destroy-my-eyes-theme';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +18,15 @@ import { ErrorService } from './services/error.service';
 })
 export class AppComponent implements OnInit {
   title = 'WebApp';
+  lightMode = false;
 
   constructor(
     @Inject('APIService') private api: IAPIService,
     private router: Router,
-    private errors: ErrorService,
-    private snackBar: SnackBarService
-  ) {}
+    private errors: ErrorService
+  ) {
+    this.lightMode = LocalStorageUtil.get<boolean>(LIGHT_THEME_KEY, false)!;
+  }
 
   onNavigationActivate(key: string) {
     switch (key) {
@@ -32,7 +37,8 @@ export class AppComponent implements OnInit {
         this.router.navigate(['profile']);
         break;
       case 'themeswitch':
-        this.snackBar.show('Not implemented yet.', SnackBarType.ERROR);
+        this.lightMode = !this.lightMode;
+        LocalStorageUtil.set(LIGHT_THEME_KEY, this.lightMode);
         break;
       case 'logout':
         this.errors.wrapRequest(async () => {

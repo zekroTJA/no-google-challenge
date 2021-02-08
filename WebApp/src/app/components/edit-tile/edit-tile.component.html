@@ -1,5 +1,5 @@
 <div
-  class="container"
+  class="container border-color"
   [style.font-size]="fontSize"
   [style.padding]="padding"
   [style.text-align]="textAlign"
@@ -24,7 +24,7 @@
       (click)="onRemove($event)"
       [title]="confirmRemoval ? 'Click to confirm delete' : ''"
     >
-      <img *ngIf="!confirmRemoval" height="20" width="20" src="/assets/trash.svg"/>
+      <img *ngIf="!confirmRemoval" height="20" width="20" src="/assets/trash.svg" class="ignore-filter"/>
       <img *ngIf="confirmRemoval" height="20" width="20" src="/assets/attention.svg"/>
     </a>
   </div>

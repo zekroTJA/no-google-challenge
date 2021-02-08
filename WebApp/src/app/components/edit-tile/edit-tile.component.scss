@@ -3,7 +3,7 @@
 .container {
   position: relative;
   text-align: center;
-  border: solid 1px $c-whitish-1;
+  border: solid 1px;
 
   &:hover > .controls {
     opacity: 1;

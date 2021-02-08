@@ -4,6 +4,10 @@
 
 * {
   box-sizing: border-box;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.05s ease;
 }
 
 body {
@@ -54,5 +58,38 @@ button {
 
   > * {
     margin: auto;
+  }
+}
+
+.light {
+  background-color: white !important;
+  color: $c-background !important;
+
+  & .hover-background {
+    &:hover {
+      background-color: rgba(black, 0.2);
+    }
+  }
+
+  & img {
+    filter: invert(1);
+  }
+
+  & .nav-background {
+    background-color: $c-background;
+  }
+}
+
+.ignore-filter {
+  filter: none !important;
+}
+
+.nav-background {
+  background-color: white;
+}
+
+.hover-background {
+  &:hover {
+    background-color: $c-whitish-3;
   }
 }

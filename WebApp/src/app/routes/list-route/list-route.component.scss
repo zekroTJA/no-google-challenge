@@ -16,11 +16,6 @@
     max-width: 400px;
     margin: 10px auto;
     transition: all 0.15s ease;
-
-    &:hover {
-      background-color: $c-whitish-3;
-    }
-
   }
 
   .strike {
@@ -28,7 +23,7 @@
     top: 23px;
     width: 100%;
     height: 4px;
-    background-color: $c-whitish-1;
+    background-color: currentColor;
   }
 
   .add-entry-tile {

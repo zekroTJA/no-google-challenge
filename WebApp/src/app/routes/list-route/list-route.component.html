@@ -15,7 +15,7 @@
           <app-skeleton-tile [delay]="i * 0.1 + 's'" height="45px"></app-skeleton-tile>
         </div>
       </ng-template>
-      <div *ngFor="let e of entries">
+      <div *ngFor="let e of entries" class="hover-background">
         <app-edit-tile
           [(content)]="e.content"
           [isEditing]="e.isNew"
@@ -29,7 +29,7 @@
         ></app-edit-tile>
         <div *ngIf="e.checked" class="strike"></div>
       </div>
-      <div class="add-entry-tile" (click)="onNew()">
+      <div class="add-entry-tile hover-background" (click)="onNew()">
         <span>+ ADD ENTRY</span>
       </div>
     </div>
