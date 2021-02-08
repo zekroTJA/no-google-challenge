@@ -15,6 +15,7 @@ import { SkeletonTileComponent } from './components/skeleton-tile/skeleton-tile.
 import { environment } from 'src/environments/environment';
 import { MockAPIService } from './services/mockapi.service';
 import { HoverNavigationComponent } from './components/hover-navigation/hover-navigation.component';
+import { UserRouteComponent } from './routes/user-route/user-route.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HoverNavigationComponent } from './components/hover-navigation/hover-na
     ListRouteComponent,
     SkeletonTileComponent,
     HoverNavigationComponent,
+    UserRouteComponent,
   ],
   imports: [
     BrowserModule,

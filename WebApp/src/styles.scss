@@ -2,6 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -23,6 +27,24 @@ input {
   font-size: 18px;
   padding: 5px 10px;
   text-align: center;
+}
+
+button {
+  background-color: transparent;
+  border: solid 1px $c-whitish-1;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 5px 10px;
+  text-align: center;
+  transition: all 0.15s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $c-whitish-1;
+    color: $c-background;
+  }
 }
 
 .center-inner {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hover-navigation',
@@ -6,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hover-navigation.component.scss'],
 })
 export class HoverNavigationComponent implements OnInit {
+  @Output() activate = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  onActivate(key: string) {
+    this.activate.emit(key);
+  }
 }
