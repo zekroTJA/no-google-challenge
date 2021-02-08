@@ -1,0 +1,27 @@
+.container {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  z-index: 9;
+
+  > div {
+    margin: 0 auto;
+    background-color: #ffffff;
+    width: fit-content;
+    display: flex;
+    border-radius: 100px;
+    box-shadow: rgba(black, 0.16) 0 5px 5px 0;
+
+    > a {
+      display: flex;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background-color: rgba(black, 0.2);
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@ import { ListRouteComponent } from './routes/list-route/list-route.component';
 import { SkeletonTileComponent } from './components/skeleton-tile/skeleton-tile.component';
 import { environment } from 'src/environments/environment';
 import { MockAPIService } from './services/mockapi.service';
+import { HoverNavigationComponent } from './components/hover-navigation/hover-navigation.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MockAPIService } from './services/mockapi.service';
     EditTileComponent,
     ListRouteComponent,
     SkeletonTileComponent,
+    HoverNavigationComponent,
   ],
   imports: [
     BrowserModule,
