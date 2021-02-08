@@ -15,15 +15,15 @@ export class MockAPIService extends RestAPIService implements IAPIService {
     super(client);
   }
 
-  // getLists(): Observable<TodoListModel[]> {
-  //   return super.getLists().pipe(delay(3000));
-  // }
+  getLists(): Observable<TodoListModel[]> {
+    return super.getLists().pipe(delay(3000));
+  }
 
-  // getList(id: string): Observable<TodoListModel> {
-  //   return super.getList(id).pipe(delay(3000));
-  // }
+  getList(id: string): Observable<TodoListModel> {
+    return super.getList(id).pipe(delay(3000));
+  }
 
-  // getListEntries(id: string): Observable<TodoListEntryModel[]> {
-  //   return super.getListEntries(id).pipe(delay(3000));
-  // }
+  getListEntries(id: string): Observable<TodoListEntryModel[]> {
+    return super.getListEntries(id).pipe(delay(3000));
+  }
 }

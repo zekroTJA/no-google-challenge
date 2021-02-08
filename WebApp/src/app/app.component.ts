@@ -1,10 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  SnackBarService,
-  SnackBarType,
-} from './components/snack-bar/snack-bar.service';
 import { IAPIService } from './services/api.interface';
 import { ErrorService } from './services/error.service';
 import LocalStorageUtil from './util/localstorage';

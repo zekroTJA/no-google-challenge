@@ -71,6 +71,12 @@ button {
     }
   }
 
+  & .hover-background-dark {
+    &:hover {
+      background-color: rgba(white, 0.2);
+    }
+  }
+
   & img {
     filter: invert(1);
   }
@@ -91,5 +97,11 @@ button {
 .hover-background {
   &:hover {
     background-color: $c-whitish-3;
+  }
+}
+
+.hover-background-dark {
+  &:hover {
+    background-color: rgba(black, 0.2);
   }
 }
