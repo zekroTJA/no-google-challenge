@@ -7,6 +7,11 @@ import { TodoListEntryModel } from '../models/todolistentry.model';
 import { IAPIService } from './api.interface';
 import RestAPIService from './restapi.service';
 
+/**
+ * Implementation of IAPIService, wrapping a RestAPIService
+ * instance and overwriting selected methods for
+ * testing purposes.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -15,15 +20,15 @@ export class MockAPIService extends RestAPIService implements IAPIService {
     super(client);
   }
 
-  getLists(): Observable<TodoListModel[]> {
-    return super.getLists().pipe(delay(3000));
-  }
+  // getLists(): Observable<TodoListModel[]> {
+  //   return super.getLists().pipe(delay(3000));
+  // }
 
-  getList(id: string): Observable<TodoListModel> {
-    return super.getList(id).pipe(delay(3000));
-  }
+  // getList(id: string): Observable<TodoListModel> {
+  //   return super.getList(id).pipe(delay(3000));
+  // }
 
-  getListEntries(id: string): Observable<TodoListEntryModel[]> {
-    return super.getListEntries(id).pipe(delay(3000));
-  }
+  // getListEntries(id: string): Observable<TodoListEntryModel[]> {
+  //   return super.getListEntries(id).pipe(delay(3000));
+  // }
 }

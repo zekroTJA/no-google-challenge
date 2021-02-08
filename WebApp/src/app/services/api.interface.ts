@@ -5,6 +5,10 @@ import { TodoListModel } from '../models/todolist.model';
 import { TodoListEntryModel } from '../models/todolistentry.model';
 import { UserModel } from '../models/user.model';
 
+/**
+ * API interface to communicate with a
+ * data backend.
+ */
 export interface IAPIService {
   error: EventEmitter<HttpErrorResponse>;
   authError: EventEmitter<HttpErrorResponse>;

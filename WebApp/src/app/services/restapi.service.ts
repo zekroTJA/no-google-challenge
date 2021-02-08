@@ -16,6 +16,10 @@ import { IAPIService } from './api.interface';
 
 const API_BASE = environment.production ? '/api' : 'https://localhost:5001/api';
 
+/**
+ * IAPIService implementation for HTTP REST API
+ * requests.
+ */
 @Injectable({
   providedIn: 'root',
 })
