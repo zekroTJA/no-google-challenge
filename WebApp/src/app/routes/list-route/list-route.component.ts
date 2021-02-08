@@ -19,7 +19,7 @@ interface TodoListEntryModelExt extends TodoListEntryModel, IsNew {}
   styleUrls: ['./list-route.component.scss'],
 })
 export class ListRouteComponent implements OnInit {
-  list = {} as TodoListModel;
+  list?: TodoListModel;
   entries?: TodoListEntryModelExt[];
 
   constructor(
@@ -49,7 +49,7 @@ export class ListRouteComponent implements OnInit {
       this.errors.wrapRequest(
         async () => {
           const newEntry = await this.api
-            .createListEntry(this.list.id, entry.content, false)
+            .createListEntry(this.list!.id, entry.content, false)
             .toPromise();
           entry.id = newEntry.id;
           entry.created = newEntry.created;
@@ -64,7 +64,7 @@ export class ListRouteComponent implements OnInit {
       );
     } else {
       this.errors.wrapRequest(async () => {
-        await this.api.updateListEntry(this.list.id, entry).toPromise();
+        await this.api.updateListEntry(this.list!.id, entry).toPromise();
         this.snackBar.show('List entry updated.', SnackBarType.SUCCESS);
       });
     }
@@ -73,7 +73,7 @@ export class ListRouteComponent implements OnInit {
   onEntryClick(entry: TodoListEntryModelExt) {
     entry.checked = !entry.checked;
     return this.errors.wrapRequest(
-      () => this.api.updateListEntry(this.list.id, entry).toPromise(),
+      () => this.api.updateListEntry(this.list!.id, entry).toPromise(),
       (err) => {
         entry.checked = !entry.checked;
         this.errors.defaultRequestErrorHandler(err);
@@ -86,7 +86,7 @@ export class ListRouteComponent implements OnInit {
       ListUtil.removeElement(this.entries!, (e) => e.id === entry.id);
     } else {
       await this.errors.wrapRequest(async () => {
-        await this.api.deleteListEntry(this.list.id, entry.id).toPromise();
+        await this.api.deleteListEntry(this.list!.id, entry.id).toPromise();
         ListUtil.removeElement(this.entries!, (e) => e.id === entry.id);
       });
     }

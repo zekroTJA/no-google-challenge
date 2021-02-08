@@ -1,14 +1,20 @@
 <div class="center-inner">
   <div>
     <div class="title-bar">
-      <app-edit-tile
+      <app-skeleton-tile *ngIf="!list" height="72px"></app-skeleton-tile>
+      <app-edit-tile *ngIf="list"
         [readonly]="true"
-        [(content)]="list.name"
+        [(content)]="list!.name"
         padding="12px"
         fontSize="30px"
       ></app-edit-tile>
     </div>
     <div class="entries-container">
+      <ng-template [ngIf]="!entries">
+        <div *ngFor="let i of [0, 1, 2]">
+          <app-skeleton-tile [delay]="i * 0.1 + 's'" height="45px"></app-skeleton-tile>
+        </div>
+      </ng-template>
       <div *ngFor="let e of entries">
         <app-edit-tile
           [(content)]="e.content"

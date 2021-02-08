@@ -32,6 +32,7 @@ export class ErrorService {
   }
 
   defaultRequestErrorHandler(err: HttpErrorResponse) {
+    console.error(err);
     let content = 'An unknown error occured.';
     if (err.error) content = `${err.error} (${err.status})`;
     this.snackBar.show(content, SnackBarType.ERROR, 3500);

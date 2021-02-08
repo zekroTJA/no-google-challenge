@@ -11,6 +11,9 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { ListsRouteComponent } from './routes/lists-route/lists-route.component';
 import { EditTileComponent } from './components/edit-tile/edit-tile.component';
 import { ListRouteComponent } from './routes/list-route/list-route.component';
+import { SkeletonTileComponent } from './components/skeleton-tile/skeleton-tile.component';
+import { environment } from 'src/environments/environment';
+import { MockAPIService } from './services/mockapi.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { ListRouteComponent } from './routes/list-route/list-route.component';
     ListsRouteComponent,
     EditTileComponent,
     ListRouteComponent,
+    SkeletonTileComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { ListRouteComponent } from './routes/list-route/list-route.component';
   providers: [
     {
       provide: 'APIService',
-      useClass: RestAPIService,
+      useClass: environment.production ? RestAPIService : MockAPIService,
     },
   ],
   bootstrap: [AppComponent],

@@ -9,6 +9,11 @@
       ></app-edit-tile>
     </div>
     <div class="lists-container">
+      <ng-template [ngIf]="!lists">
+        <div *ngFor="let i of [0, 1, 2]">
+          <app-skeleton-tile [delay]="i * 0.1 + 's'" height="45px"></app-skeleton-tile>
+        </div>
+      </ng-template>
       <div *ngFor="let l of lists">
         <app-edit-tile
           [(content)]="l.name"
