@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using ToDoList.Database;
 using ToDoList.Filters;
@@ -15,6 +16,7 @@ namespace ToDoList.Controllers.Endpoints
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(RequiresAuthorization))]
+    [RateLimit(10, 1)]
     public class UsersController : AuthorizedControllerBase
     {
         private readonly IContext db;

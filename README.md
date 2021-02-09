@@ -57,6 +57,7 @@ I'm recording my progress creating the web application as videos on my *(german)
 - [**Episode 2**](https://youtu.be/tlqYuGF6fZ0): User Authorization
 - [**Episode 3**](https://youtu.be/ZpFVGeIgHCc): List/Entry Endpoints
 - [**Episode 4**](https://youtu.be/v1fMdgqg5q0): Unit Tests & Frontend Design
+- [**Episode 5**](https://youtu.be/gzP6jXfWmcU): UI: List/Entry Views
 
 ## My Results and Findings
 

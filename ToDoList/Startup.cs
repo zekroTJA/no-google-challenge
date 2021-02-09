@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ToDoList.Database;
+using ToDoList.Filters;
 using ToDoList.Modules;
 
 namespace ToDoList
@@ -34,7 +35,7 @@ namespace ToDoList
                     : new JWTAuthorization(services.GetService<ILogger<JWTAuthorization>>(), jwtSigningKey))
                 ;
             
-            services.AddControllers();
+            services.AddControllers(c => c.Filters.Add<ProxyAddressFilter>());
             services.AddSwaggerGen(c => 
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDoList", Version = "v1" }));
         }

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using ToDoList.Database;
+using ToDoList.Filters;
 using ToDoList.Models;
 using ToDoList.Models.Requests;
 using ToDoList.Models.Responses;
@@ -34,6 +35,7 @@ namespace ToDoList.Controllers.Endpoints
         // --- POST /api/auth/register
 
         [HttpPost("[action]")]
+        [RateLimit(3, 60)]
         public async Task<ActionResult<UserView>> Register([FromBody] AuthCredentials creds)
         {
             if (await db.Users.AnyAsync(u => u.LoginName == creds.LoginName))
@@ -55,6 +57,7 @@ namespace ToDoList.Controllers.Endpoints
         // --- POST /api/auth/login
 
         [HttpPost("[action]")]
+        [RateLimit(3, 60)]
         public async Task<ActionResult<UserView>> Login([FromBody] AuthCredentials creds)
         {
             var user = await db.Users.Where(u => u.LoginName == creds.LoginName).FirstOrDefaultAsync();

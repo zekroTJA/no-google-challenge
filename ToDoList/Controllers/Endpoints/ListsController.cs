@@ -19,6 +19,7 @@ namespace ToDoList.Controllers.Endpoints
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(RequiresAuthorization))]
+    [RateLimit(10, 1)]
     public class ListsController : AuthorizedControllerBase
     {
         private readonly IContext db;
@@ -46,7 +47,8 @@ namespace ToDoList.Controllers.Endpoints
         // --- POST /api/lists
 
         [HttpPost]
-        public async Task<ActionResult<TodoListView>> GetLists([FromBody] ListCreate list)
+        [RateLimit(3, 5)]
+        public async Task<ActionResult<TodoListView>> CreateList([FromBody] ListCreate list)
         {
             var createdList = new TodoList()
             {
@@ -149,7 +151,8 @@ namespace ToDoList.Controllers.Endpoints
         // --- POST /api/lists/:id/entries
 
         [HttpPost("{id}/entries")]
-        public async Task<ActionResult<TodoEntryView>> AddListEntry(
+        [RateLimit(5, 3)]
+        public async Task<ActionResult<TodoEntryView>> CreateListEntry(
             [FromRoute] Guid id,
             [FromBody] ListEntryCreate entry)
         {
