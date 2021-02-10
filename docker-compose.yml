@@ -1,0 +1,55 @@
+version: '3'
+
+volumes:
+  postgres:
+
+services:
+  traefik:
+    image: "traefik:2.4"
+    command:
+      - "--providers.docker"
+      - "--providers.docker.exposedByDefault=false"
+      - "--entrypoints.http.address=:80"
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  postgres:
+    image: "postgres:13-alpine"
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "postgres_password"
+    restart: always
+
+  todo-backend:
+    image: "zekro/todo-backend:latest"
+    build:
+      context: ./ToDoList
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    environment:
+      CONNECTIONSTRINGS__POSTGRES: "Host=postgres;Database=todolist;Username=root;Password=postgres_password"
+      AUTHORIZATION__USESECURECOOKIES: "false" # CHANGE THIS TO TRUE WHEN USING HTTPS!
+    restart: on-failure
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.todo-backend.entrypoints=http"
+      - "traefik.http.routers.todo-backend.rule=PathPrefix(`/api/`)"
+
+  todo-webapp:
+    image: "zekro/todo-webapp:latest"
+    build:
+      context: ./WebApp
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    restart: on-failure
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.todo-webapp.entrypoints=http"
+      - "traefik.http.routers.todo-webapp.rule=PathPrefix(`/`)"
+      - "traefik.http.services.todo-webapp.loadbalancer.server.port=8080"
