@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,12 +25,22 @@ namespace ToDoList.Controllers.Endpoints
         private readonly IContext db;
         private readonly IPasswordHasher hasher;
         private readonly IAuthorization auth;
+        private readonly bool useSecureCookies;
 
-        public AuthController(IContext _db, IPasswordHasher _hasher, IAuthorization _auth)
+        public AuthController(
+            IContext _db, 
+            IPasswordHasher _hasher, 
+            IAuthorization _auth,
+            ILogger<AuthController> _logger,
+            IConfiguration _config)
         {
             db = _db;
             hasher = _hasher;
             auth = _auth;
+            useSecureCookies = _config.GetValue("Authorization:UseSecureCookies", true);
+
+            if (!useSecureCookies)
+                _logger.LogWarning("Secure cookies are disabled! Please do not disable secure cookies in production!");
         }
 
         // -------------------------------------------------------------------------------
