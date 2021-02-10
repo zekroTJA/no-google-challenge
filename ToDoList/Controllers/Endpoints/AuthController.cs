@@ -85,7 +85,7 @@ namespace ToDoList.Controllers.Endpoints
                 HttpOnly = true,
                 MaxAge = Constants.SESSION_EXPIRATION,
 #if RELEASE
-                Secure = true,
+                Secure = useSecureCookies,
 #endif
             };
             Response.Cookies.Append(Constants.SESSION_COOKIE_NAME, sessionJwt, cookieOptions);
