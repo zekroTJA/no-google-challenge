@@ -1,0 +1,33 @@
+name: 'Docker CD'
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  docker_deploy_backend:
+    name: 'Docker Deploy Backend'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out code'
+        uses: actions/checkout@v2
+      - name: 'Build Image'
+        run: docker build ./ToDoList -t zekro/todo-backend:latest
+      - name: 'Publish Image'
+        run: |
+          docker login -u zekro -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push zekro/todo-backend:latest
+
+  docker_deploy_webapp:
+    name: 'Docker Deploy WebApp'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out code'
+        uses: actions/checkout@v2
+      - name: 'Build Image'
+        run: docker build ./WebApp -t zekro/todo-webapp:latest
+      - name: 'Publish Image'
+        run: |
+          docker login -u zekro -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push zekro/todo-webapp:latest
